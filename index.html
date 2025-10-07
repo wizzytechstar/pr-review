@@ -1,351 +1,652 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PR Review Status Board - Streamline Your Code Review Process</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    body {
-      box-sizing: border-box;
-    }
-    .gradient-bg {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    .feature-card {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-    .pulse-animation {
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-    }
-  </style>
-</head>
-<body class="bg-white text-gray-900 antialiased">
-  
-  <!-- Header -->
-  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center">
-          <h1 class="text-xl font-bold text-gray-900">PR Review Status Board</h1>
-        </div>
-        
-        <div class="flex items-center space-x-4">
-          <span id="todayDate" class="text-sm text-gray-600 hidden sm:block"></span>
-          <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-            Get Started
-          </button>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Floating Download Button -->
-  <div class="fixed bottom-6 right-6 z-50">
-    <button id="downloadBtn" class="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-full shadow-lg font-medium transition-all duration-300 hover:scale-105 flex items-center space-x-2">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-        <polyline points="7,10 12,15 17,10"/>
-        <line x1="12" y1="15" x2="12" y2="3"/>
-      </svg>
-      <span class="hidden sm:inline">Download PNG</span>
-    </button>
-  </div>
-
-  <!-- Hero Section -->
-  <section class="gradient-bg text-white py-20 lg:py-32">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="max-w-4xl mx-auto">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-          Finally, a PR Dashboard That Actually Works
-        </h1>
-        <p class="text-xl sm:text-2xl mb-8 text-indigo-100 leading-relaxed">
-          We got tired of losing track of pull requests, so we built this. No more "wait, whose turn is it to review?" or PRs sitting forgotten for weeks.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button class="bg-white text-indigo-600 hover:bg-gray-50 px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg">
-            Get Started Free
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-          The Features We Wish We Had Years Ago
-        </h2>
-        <p class="text-xl text-gray-800 max-w-3xl mx-auto">
-          Built by developers who've been there - stuck refreshing GitHub, hunting through Slack for PR updates, and wondering why that critical fix is still waiting for review.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Feature 1: Real-time Status Tracking -->
-        <div class="feature-card bg-white p-6 rounded-xl border border-gray-200">
-          <div class="h-12 w-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-green-600">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">See What's Actually Happening</h3>
-          <p class="text-gray-800">
-            No more "is this PR still being reviewed?" Just look at the board. Green means good to go, red means needs attention. Simple as that.
-          </p>
-        </div>
-
-        <!-- Feature 2: Smart Filtering & Search -->
-        <div class="feature-card bg-white p-6 rounded-xl border border-gray-200">
-          <div class="h-12 w-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-blue-600">
-              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Find Stuff Without Going Crazy</h3>
-          <p class="text-gray-800">
-            "Where's that PR Sarah was working on?" Just type her name. Or the repo. Or that bug number you vaguely remember. It'll find it.
-          </p>
-        </div>
-
-        <!-- Feature 3: Team Collaboration -->
-        <div class="feature-card bg-white p-6 rounded-xl border border-gray-200">
-          <div class="h-12 w-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-purple-600">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
-              <path d="M23 21v-2a4 4 0 00-3-3.87" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Stop Playing Review Tag</h3>
-          <p class="text-gray-800">
-            See who's swamped with reviews and who's free. No more awkward "hey, can someone look at this?" messages in Slack.
-          </p>
-        </div>
-
-        <!-- Feature 4: Analytics & Insights -->
-        <div class="feature-card bg-white p-6 rounded-xl border border-gray-200">
-          <div class="h-12 w-12 bg-orange-100 rounded-lg flex items-center justify-center mb-4">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="text-orange-600">
-              <path d="M9 19c-5 0-8-3-8-8s3-8 8-8 8 3 8 8-3 8-8 8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M15 10l-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M9 9h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold text-gray-900 mb-2">Figure Out What's Broken</h3>
-          <p class="text-gray-800">
-            Why do PRs take forever? Is it always the same bottleneck? Now you'll actually know instead of just guessing.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-20 bg-indigo-600">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <div class="max-w-3xl mx-auto">
-        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
-          Honestly, Just Try It
-        </h2>
-        <p class="text-xl text-indigo-100 mb-8">
-          We built this because we needed it. If you're dealing with the same PR chaos we were, it'll probably help you too.
-        </p>
-        <button class="bg-white text-indigo-600 hover:bg-gray-50 px-8 py-4 rounded-lg font-semibold text-lg transition-colors shadow-lg pulse-animation">
-          Start Your Free Trial
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-12">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div>
-          <div class="mb-4">
-            <h3 class="text-xl font-bold">PR Review Status Board</h3>
-          </div>
-        </div>
-        
-        <div class="md:text-right">
-          <h4 class="text-lg font-semibold mb-4">Tier 3 - Team 32 Repository</h4>
-          <div class="space-y-2 mb-6">
-            <div class="flex md:justify-end items-center space-x-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span class="text-gray-300">Acto: GitHub / LinkedIn</span>
-            </div>
-            <div class="flex md:justify-end items-center space-x-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span class="text-gray-300">BettyC: GitHub / LinkedIn</span>
-            </div>
-            <div class="flex md:justify-end items-center space-x-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span class="text-gray-300">Devim: GitHub / LinkedIn</span>
-            </div>
-            <div class="flex md:justify-end items-center space-x-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.30 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span class="text-gray-300">Nadeem: GitHub</span>
-            </div>
-            <div class="flex md:justify-end items-center space-x-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span class="text-gray-300">Reckless: GitHub</span>
-            </div>
-            <div class="flex md:justify-end items-center space-x-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span class="text-gray-300">Snowbytes: GitHub</span>
-            </div>
-            <div class="flex md:justify-end items-center space-x-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="text-gray-400">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              <span class="text-gray-300">theDevGuy578: GitHub</span>
-            </div>
-          </div>
-          
-          <a href="https://github.com/pr-review-status-board" target="_blank" rel="noopener noreferrer" 
-             class="inline-flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg transition-colors">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-white">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            <span>View on GitHub</span>
-          </a>
-        </div>
-      </div>
-      
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-      </div>
-    </div>
-  </footer>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script>
-    // Set today's date in header
-    function setTodayDate() {
-      const now = new Date();
-      const options = { 
-        weekday: 'short', 
-        year: 'numeric', 
-        month: 'short', 
-        day: 'numeric' 
-      };
-      const dateString = now.toLocaleDateString(undefined, options);
-      document.getElementById('todayDate').textContent = dateString;
-    }
-
-    // Download functionality
-    function downloadPageAsPNG() {
-      const downloadBtn = document.getElementById('downloadBtn');
-      const originalText = downloadBtn.innerHTML;
-      
-      // Show loading state
-      downloadBtn.innerHTML = `
-        <svg class="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
-          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" class="opacity-25"></circle>
-          <path fill="currentColor" class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-        </svg>
-        <span>Generating...</span>
-      `;
-      downloadBtn.disabled = true;
-
-      // Get the full document dimensions
-      const fullHeight = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight
-      );
-      
-      const fullWidth = Math.max(
-        document.body.scrollWidth,
-        document.body.offsetWidth,
-        document.documentElement.clientWidth,
-        document.documentElement.scrollWidth,
-        document.documentElement.offsetWidth
-      );
-
-      // Capture the entire page with full dimensions
-      html2canvas(document.body, {
-        height: fullHeight,
-        width: fullWidth,
-        useCORS: true,
-        allowTaint: true,
-        scale: 2, // Higher quality
-        scrollX: 0,
-        scrollY: 0,
-        windowWidth: fullWidth,
-        windowHeight: fullHeight,
-        backgroundColor: '#ffffff',
-        logging: false,
-        removeContainer: true
-      }).then(canvas => {
-        // Create download link
-        const link = document.createElement('a');
-        link.download = 'pr-review-status-board.png';
-        link.href = canvas.toDataURL('image/png', 1.0);
-        
-        // Trigger download
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        // Reset button
-        downloadBtn.innerHTML = originalText;
-        downloadBtn.disabled = false;
-      }).catch(error => {
-        console.error('Error generating image:', error);
-        alert('Sorry, there was an error generating the image. Please try again.');
-        
-        // Reset button
-        downloadBtn.innerHTML = originalText;
-        downloadBtn.disabled = false;
-      });
-    }
-
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prestige Collectibles - Exclusive Celebrity Investment Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            box-sizing: border-box;
         }
-      });
-    });
+        
+        .serif { font-family: 'Playfair Display', serif; }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #1e293b 75%, #0f172a 100%);
+        }
+        
+        .premium-card {
+            background: linear-gradient(145deg, #1f2937 0%, #111827 100%);
+            border: 1px solid #374151;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: #d4af37;
+        }
+        
+        .feature-image {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+            border: none;
+            box-shadow: 0 6px 24px rgba(212, 175, 55, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+        }
+        
+        .secondary-button {
+            background: linear-gradient(145deg, #374151 0%, #1f2937 100%);
+            border: 2px solid #4b5563;
+            color: #d1d5db;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .secondary-button:hover {
+            background: linear-gradient(145deg, #4b5563 0%, #374151 100%);
+            border-color: #d4af37;
+            color: #f9fafb;
+            transform: translateY(-2px);
+        }
+        
+        .stats-card {
+            background: linear-gradient(145deg, #1f2937 0%, #111827 100%);
+            border: 1px solid #374151;
+            backdrop-filter: blur(10px);
+        }
+        
+        .text-gold {
+            color: #d4af37;
+        }
+        
+        .price-gold {
+            background: linear-gradient(135deg, #d4af37 0%, #f7e98e 50%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glassmorphism-dark {
+            background: rgba(31, 41, 55, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        .trust-badge {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+        
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+        
+        .hero-text {
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body class="hero-gradient min-h-screen text-gray-100">
+    <!-- Header -->
+    <header class="bg-gray-900/90 backdrop-blur-md border-b border-gray-700/50 sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-lg flex items-center justify-center shadow-lg">
+                        <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold serif text-gold">Prestige Collectibles</h1>
+                        <p class="text-sm text-gray-400 font-medium">Exclusive Investment Platform</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-300 hover:text-gold transition-colors font-medium">Collections</a>
+                    <a href="#" class="text-gray-300 hover:text-gold transition-colors font-medium">Market</a>
+                    <a href="#" class="text-gray-300 hover:text-gold transition-colors font-medium">About</a>
+                    <a href="#" class="text-gray-300 hover:text-gold transition-colors font-medium">Contact</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <button class="secondary-button px-6 py-2 rounded-lg font-semibold text-sm">Sign In</button>
+                    <button class="cta-button text-gray-900 px-6 py-2 rounded-lg font-semibold text-sm">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    // Initialize
-    setTodayDate();
-    
-    // Add download button event listener
-    document.getElementById('downloadBtn').addEventListener('click', downloadPageAsPNG);
-  </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98aca296e67d7028',t:'MTc1OTgzMjEwMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <!-- Hero Section -->
+    <section class="relative py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="slide-in-left">
+                    <h2 class="text-6xl lg:text-7xl font-bold serif text-gold mb-8 hero-text leading-tight">
+                        Invest in 
+                        <span class="block">Celebrity Legacy</span>
+                    </h2>
+                    <p class="text-xl text-gray-300 mb-12 leading-relaxed font-light">
+                        Access authenticated celebrity memorabilia and exclusive collectibles. 
+                        Each piece is verified, insured, and represents a unique investment opportunity 
+                        in cultural history.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <button class="cta-button text-gray-900 font-bold px-10 py-4 rounded-xl text-lg">
+                            Explore Collections
+                        </button>
+                        <button class="secondary-button font-bold px-10 py-4 rounded-xl text-lg">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="slide-in-right">
+                    <div class="relative">
+                        <div class="premium-card p-8 rounded-2xl floating">
+                            <div class="feature-image h-64 rounded-xl flex items-center justify-center mb-6">
+                                <div class="text-center text-gray-300">
+                                    <div class="text-8xl mb-4">🏆</div>
+                                    <div class="text-lg font-medium opacity-90 serif">Premium Authenticated</div>
+                                </div>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-100 mb-3 serif">Featured Collection</h3>
+                            <p class="text-gray-400 mb-6">Exclusive celebrity memorabilia with full authentication and provenance documentation.</p>
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="text-sm text-gray-500 uppercase tracking-wide">Starting Bid</p>
+                                    <p class="text-2xl font-bold price-gold">$25,000</p>
+                                </div>
+                                <div class="trust-badge text-white px-4 py-2 rounded-lg text-sm font-bold">
+                                    ✓ Authenticated
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Stats -->
+    <section class="py-20 bg-gray-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h3 class="text-4xl font-bold serif text-gold mb-4">Market Overview</h3>
+                <p class="text-xl text-gray-300 font-light">Real-time insights into the celebrity collectibles market</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="stats-card p-8 rounded-2xl text-center fade-in-up" style="animation-delay: 0.1s">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <p class="text-4xl font-bold text-gold mb-2">247</p>
+                    <p class="text-gray-400 font-medium">Active Auctions</p>
+                </div>
+                
+                <div class="stats-card p-8 rounded-2xl text-center fade-in-up" style="animation-delay: 0.2s">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-600 to-green-500 rounded-xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <p class="text-4xl font-bold text-gold mb-2">$12.4M</p>
+                    <p class="text-gray-400 font-medium">Total Volume</p>
+                </div>
+                
+                <div class="stats-card p-8 rounded-2xl text-center fade-in-up" style="animation-delay: 0.3s">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-purple-500 rounded-xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-4xl font-bold text-gold mb-2">8,500+</p>
+                    <p class="text-gray-400 font-medium">Active Investors</p>
+                </div>
+                
+                <div class="stats-card p-8 rounded-2xl text-center fade-in-up" style="animation-delay: 0.4s">
+                    <div class="w-16 h-16 bg-gradient-to-r from-red-600 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-4xl font-bold text-gold mb-2">100%</p>
+                    <p class="text-gray-400 font-medium">Authenticated</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-up">
+                <h3 class="text-5xl font-bold serif text-gold mb-6">Featured Collections</h3>
+                <p class="text-xl text-gray-300 font-light max-w-3xl mx-auto">
+                    Discover our most exclusive and sought-after celebrity memorabilia, 
+                    each piece authenticated and ready for investment.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Featured Item 1 -->
+                <div class="premium-card rounded-2xl overflow-hidden fade-in-up" style="animation-delay: 0.1s">
+                    <div class="relative">
+                        <div class="feature-image h-72 flex items-center justify-center">
+                            <div class="text-center text-gray-300">
+                                <div class="text-8xl mb-4">🎸</div>
+                                <div class="text-sm font-medium opacity-80 serif">Music Legend</div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 trust-badge text-white px-4 py-2 rounded-lg text-xs font-bold">
+                            🔥 Trending
+                        </div>
+                        <div class="absolute bottom-4 left-4 glassmorphism-dark text-gray-200 px-4 py-2 rounded-lg text-sm font-semibold">
+                            Taylor Swift Collection
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-2xl text-gray-100 mb-3 serif">Eras Tour Memorabilia</h4>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Authentic signed items from the record-breaking Eras Tour, complete with certificates of authenticity.</p>
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Starting From</p>
+                                <p class="font-bold text-2xl price-gold">$12,500</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Items Available</p>
+                                <p class="font-bold text-xl text-gray-300">8</p>
+                            </div>
+                        </div>
+                        <button class="w-full cta-button text-gray-900 font-bold py-4 rounded-xl">
+                            View Collection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Featured Item 2 -->
+                <div class="premium-card rounded-2xl overflow-hidden fade-in-up" style="animation-delay: 0.2s">
+                    <div class="relative">
+                        <div class="feature-image h-72 flex items-center justify-center">
+                            <div class="text-center text-gray-300">
+                                <div class="text-8xl mb-4">🏀</div>
+                                <div class="text-sm font-medium opacity-80 serif">Sports Legend</div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 trust-badge text-white px-4 py-2 rounded-lg text-xs font-bold">
+                            👑 Exclusive
+                        </div>
+                        <div class="absolute bottom-4 left-4 glassmorphism-dark text-gray-200 px-4 py-2 rounded-lg text-sm font-semibold">
+                            LeBron James Archive
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-2xl text-gray-100 mb-3 serif">Championship Legacy</h4>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Game-worn jerseys and equipment from historic championship victories, authenticated by the NBA.</p>
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Starting From</p>
+                                <p class="font-bold text-2xl price-gold">$35,000</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Items Available</p>
+                                <p class="font-bold text-xl text-gray-300">5</p>
+                            </div>
+                        </div>
+                        <button class="w-full cta-button text-gray-900 font-bold py-4 rounded-xl">
+                            View Collection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Featured Item 3 -->
+                <div class="premium-card rounded-2xl overflow-hidden fade-in-up" style="animation-delay: 0.3s">
+                    <div class="relative">
+                        <div class="feature-image h-72 flex items-center justify-center">
+                            <div class="text-center text-gray-300">
+                                <div class="text-8xl mb-4">🎬</div>
+                                <div class="text-sm font-medium opacity-80 serif">Hollywood Icon</div>
+                            </div>
+                        </div>
+                        <div class="absolute top-4 right-4 trust-badge text-white px-4 py-2 rounded-lg text-xs font-bold">
+                            ⭐ Premium
+                        </div>
+                        <div class="absolute bottom-4 left-4 glassmorphism-dark text-gray-200 px-4 py-2 rounded-lg text-sm font-semibold">
+                            Marvel Universe
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-2xl text-gray-100 mb-3 serif">Movie Memorabilia</h4>
+                        <p class="text-gray-400 mb-6 leading-relaxed">Original props, costumes, and scripts from blockbuster films, verified by studio authentication.</p>
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Starting From</p>
+                                <p class="font-bold text-2xl price-gold">$8,900</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-xs text-gray-500 uppercase tracking-wide mb-1">Items Available</p>
+                                <p class="font-bold text-xl text-gray-300">12</p>
+                            </div>
+                        </div>
+                        <button class="w-full cta-button text-gray-900 font-bold py-4 rounded-xl">
+                            View Collection
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust & Authentication -->
+    <section class="py-24 bg-gray-900/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="slide-in-left">
+                    <h3 class="text-5xl font-bold serif text-gold mb-8">Uncompromising Authentication</h3>
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed font-light">
+                        Every item in our collection undergoes rigorous authentication by industry experts, 
+                        ensuring you invest with complete confidence in genuine celebrity memorabilia.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-green-600 to-green-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-100 mb-2">Expert Verification</h4>
+                                <p class="text-gray-400">Authenticated by recognized industry professionals and third-party verification services.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-100 mb-2">Complete Provenance</h4>
+                                <p class="text-gray-400">Full documentation of ownership history and chain of custody for every item.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-100 mb-2">Insurance Coverage</h4>
+                                <p class="text-gray-400">All items are fully insured and stored in climate-controlled, secure facilities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="slide-in-right">
+                    <div class="stats-card p-10 rounded-2xl">
+                        <div class="text-center mb-8">
+                            <div class="w-20 h-20 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                                <svg class="w-10 h-10 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                                </svg>
+                            </div>
+                            <h4 class="text-3xl font-bold text-gold mb-4">Certificate of Authenticity</h4>
+                            <p class="text-gray-400 mb-8">Every purchase includes comprehensive documentation and lifetime authenticity guarantee.</p>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                                <span class="text-gray-400">Authentication Rate</span>
+                                <span class="text-gold font-bold">100%</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                                <span class="text-gray-400">Expert Verifiers</span>
+                                <span class="text-gold font-bold">50+</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                                <span class="text-gray-400">Items Authenticated</span>
+                                <span class="text-gold font-bold">25,000+</span>
+                            </div>
+                            <div class="flex justify-between items-center py-3">
+                                <span class="text-gray-400">Satisfaction Rate</span>
+                                <span class="text-gold font-bold">99.8%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="fade-in-up">
+                <h3 class="text-5xl font-bold serif text-gold mb-8">Start Your Investment Journey</h3>
+                <p class="text-xl text-gray-300 mb-12 leading-relaxed font-light">
+                    Join thousands of collectors and investors who trust Prestige Collectibles 
+                    for authenticated celebrity memorabilia and exclusive investment opportunities.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <button class="cta-button text-gray-900 font-bold px-12 py-5 rounded-xl text-lg">
+                        Browse Collections
+                    </button>
+                    <button class="secondary-button font-bold px-12 py-5 rounded-xl text-lg">
+                        Schedule Consultation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 border-t border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-yellow-600 to-yellow-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold serif text-gold">Prestige Collectibles</h4>
+                            <p class="text-gray-400">Exclusive Investment Platform</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        The premier destination for authenticated celebrity memorabilia and exclusive collectible investments. 
+                        Trusted by collectors and investors worldwide.
+                    </p>
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors cursor-pointer">
+                            <span class="text-gray-400">f</span>
+                        </div>
+                        <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors cursor-pointer">
+                            <span class="text-gray-400">t</span>
+                        </div>
+                        <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors cursor-pointer">
+                            <span class="text-gray-400">in</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h5 class="text-lg font-bold text-gray-100 mb-6">Collections</h5>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Music Memorabilia</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Sports Collectibles</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Movie Props</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Fashion & Style</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h5 class="text-lg font-bold text-gray-100 mb-6">Support</h5>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Authentication</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-gold transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">© 2024 Prestige Collectibles. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors text-sm">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll-based animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.fade-in-up, .slide-in-left, .slide-in-right').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
+        });
+
+        // Button interactions
+        document.querySelectorAll('.cta-button, .secondary-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Button clicked:', this.textContent.trim());
+                // Add your navigation logic here
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ad57b8f255bb2d',t:'MTc1OTgzOTUyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
